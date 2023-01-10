@@ -6,6 +6,7 @@ class McsModal extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
         @import "https://cdn.jsdelivr.net/gh/davidkupyn/technischools-recruit-modal/style.css";
       </style>
       <main id="mcsModalOuter"
