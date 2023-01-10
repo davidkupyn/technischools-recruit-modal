@@ -5,9 +5,11 @@ class McsModal extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
+      <style>
+        @import "https://cdn.jsdelivr.net/gh/davidkupyn/technischools-recruit-modal/style.css";
+      </style>
       <main id="mcsModalOuter"
       class="pointer-events-none opacity-0 transition-all ease-in fixed top-0 w-full min-h-screen grid place-items-center bg-black/80 px-6 sm:px-12 duration-150">
-  
       <div id="mcsModal"
         class="relative lg:h-140 lg:w-192 flex flex-col gap-9 bg-techni-blue rounded-xl sm:py-20 sm:px-12 py-9 px-4 scale-75 transition-all ease-in-out delay-100 duration-150">
         <button id="mcsModalCloseBtn"
