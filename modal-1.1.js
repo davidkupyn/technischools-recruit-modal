@@ -4,14 +4,13 @@ class McsModal extends HTMLElement {
   }
 
   connectedCallback() {
-    document.innerHTML = `
+    this.innerHTML = `
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
         @import "https://cdn.jsdelivr.net/gh/davidkupyn/technischools-recruit-modal/style.css";
       </style>
       <main id="mcsModalOuter"
       class="pointer-events-none opacity-0 transition-all ease-in fixed top-0 w-full min-h-screen grid place-items-center bg-black/80 px-6 sm:px-12 duration-150">
-  
       <div id="mcsModal"
         class="relative lg:h-140 lg:w-192 flex flex-col gap-9 bg-techni-blue rounded-xl sm:py-20 sm:px-12 py-9 px-4 scale-75 transition-all ease-in-out delay-100 duration-150">
         <button id="mcsModalCloseBtn"
@@ -52,7 +51,8 @@ class McsModal extends HTMLElement {
           <form class="grid place-items-center gap-4" id="telForm">
   
             <div class="flex gap-2">
-              <input type="tel" id="tel"
+              <input type="tel" 
+                id="tel"
                 class="w-full md:w-64 h-8 rounded-lg bg-gray-200 outline-none focus:border-techni-blue focus:border-2 transition-all duration-75 px-4 text-gray-60 text-sm sm:text-base"
                 placeholder="Numer telefonu" required>
               <button
@@ -81,7 +81,6 @@ class McsModal extends HTMLElement {
 }
 
 customElements.define('mcs-modal', McsModal);
-
 const btn = document.querySelector('#show');
 const modalOuter = document.querySelector('#mcsModalOuter');
 const modal = document.querySelector('#mcsModal');
