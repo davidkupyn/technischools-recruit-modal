@@ -8,6 +8,10 @@ class McsModal extends HTMLElement {
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
         @import "https://cdn.jsdelivr.net/gh/davidkupyn/technischools-recruit-modal/style.css";
+         main {
+          z-index: 9999;
+          position: fixed;
+        }
       </style>
       <main id="mcsModalOuter"
       class="pointer-events-none opacity-0 transition-all ease-in fixed top-0 w-full min-h-screen grid place-items-center bg-black/80 px-6 sm:px-12 duration-150">
