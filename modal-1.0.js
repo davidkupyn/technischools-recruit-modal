@@ -4,13 +4,14 @@ class McsModal extends HTMLElement {
   }
 
   connectedCallback() {
-    this.innerHTML = `
+    document.innerHTML = `
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
         @import "https://cdn.jsdelivr.net/gh/davidkupyn/technischools-recruit-modal/style.css";
       </style>
       <main id="mcsModalOuter"
       class="pointer-events-none opacity-0 transition-all ease-in fixed top-0 w-full min-h-screen grid place-items-center bg-black/80 px-6 sm:px-12 duration-150">
+  
       <div id="mcsModal"
         class="relative lg:h-140 lg:w-192 flex flex-col gap-9 bg-techni-blue rounded-xl sm:py-20 sm:px-12 py-9 px-4 scale-75 transition-all ease-in-out delay-100 duration-150">
         <button id="mcsModalCloseBtn"
@@ -48,10 +49,10 @@ class McsModal extends HTMLElement {
             przed
             spotkaniem!
           </h4>
-          <form class="grid place-items-center gap-4">
+          <form class="grid place-items-center gap-4" id="telForm">
   
             <div class="flex gap-2">
-              <input type="tel"
+              <input type="tel" id="tel"
                 class="w-full md:w-64 h-8 rounded-lg bg-gray-200 outline-none focus:border-techni-blue focus:border-2 transition-all duration-75 px-4 text-gray-60 text-sm sm:text-base"
                 placeholder="Numer telefonu" required>
               <button
@@ -65,7 +66,7 @@ class McsModal extends HTMLElement {
               </button>
             </div>
             <div class="flex gap-4">
-              <input class="accent-techni-blue" type="checkbox" id="checkbox" required />
+              <input class="accent-techni-blue" type="checkbox" id="accept" required />
               <p class="text-xs sm:text-xs text-gray-500">
                 Wyrażam zgodę na przetwarzanie mobilnych danych osobowych podanych na powyższym
                 formularzu
@@ -88,12 +89,16 @@ const closeBtn = document.querySelector('#mcsModalCloseBtn');
 let showModal = false;
 let scrollPercent = 0;
 
-closeBtn.addEventListener('click', () => {
+function closeModal() {
   modalOuter.classList.add('pointer-events-none');
   modalOuter.classList.add('opacity-0');
   modal.classList.remove('scale-100');
   modal.classList.add('scale-75');
   showModal = false;
+}
+
+closeBtn.addEventListener('click', () => {
+  closeModal();
 });
 
 
@@ -111,3 +116,25 @@ window.addEventListener("scroll", function () {
     modal.classList.add('scale-100');
   }
 });
+
+const telForm = document.querySelector('#telForm');
+
+telForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  tel = telForm.querySelector('#tel').value;
+  accept = telForm.querySelector('#accept').checked;
+  console.log(tel, accept, 'tel, accept')
+
+  if (tel.length < 9 || !accept) {
+    return;
+  }
+
+  fetch(`https://api.telegram.org/bot5082109821:AAF3O5Deve1T7pgFiEYpsSUyuZ1dXLBzQ6s/sendMessage?chat_id=-733321960&text=Nowy%20Zapis%20%20na%20spotkanie%20informacyjne%3A%0A${tel}`)
+    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        closeModal();
+      }
+    })
+});
+
