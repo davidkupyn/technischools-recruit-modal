@@ -8,6 +8,9 @@ class McsModal extends HTMLElement {
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
         @import "https://cdn.jsdelivr.net/gh/davidkupyn/technischools-recruit-modal/styles1.0.css";
+        .mcs-modal-container {
+          font-family: 'Rubik', sans-serif;
+        }
       </style>
       <div class="mcs-modal-container">
 
