@@ -41,13 +41,13 @@ class McsModal extends HTMLElement {
             <div class="flex justify-around w-full text-sm sm:text-base">
               <p class="text-center text-gray-500">
                 <span class="text-gray-600 font-semibold">Warszawa: </span> <br>
-                07.02.2023 o 17:30 <br>
+                06.03.2023 o 17:30 <br>
                 ul. Okopowa 59 <br>
                 (V piętro)
               </p>
               <p class="text-center text-gray-500">
                 <span class="text-gray-600 font-semibold">Lublin: </span> <br>
-                06.02.2023 o 17:30 <br>
+                06.03.2023 o 17:30 <br>
                 ul. Narutowicza 55b <br>
                 (II piętro)
               </p>
