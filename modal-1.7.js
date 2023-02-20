@@ -33,7 +33,7 @@ class McsModal extends HTMLElement {
           <div class="bg-white rounded-xl w-full h-full flex flex-col gap-4 items-center sm:px-8 sm:py-4 p-4">
             <h3 class="text-techni-pink-500 font-bold text-md text-center sm:text-xl">Najbliższe <br>
               <span class="uppercase text-xl sm:text-2xl">
-                spotkania rekrutacyjne
+                spotkania informacyjne
               </span>
               <br>
               do Techni Schools:
