@@ -33,21 +33,21 @@ class McsModal extends HTMLElement {
           <div class="bg-white rounded-xl w-full h-full flex flex-col gap-4 items-center sm:px-8 sm:py-4 p-4">
             <h3 class="text-techni-pink-500 font-bold text-md text-center sm:text-xl">Najbliższe <br>
               <span class="uppercase text-xl sm:text-2xl">
-                spotkania informacyjne
+                Dni Otwarte
               </span>
               <br>
-              do Techni Schools:
+              w Techni Schools:
             </h3>
             <div class="flex justify-around w-full text-sm sm:text-base">
               <p class="text-center text-gray-500">
                 <span class="text-gray-600 font-semibold">Warszawa: </span> <br>
-                06.03.2023 o 17:30 <br>
+                27.04.2023 o 17:30 <br>
                 ul. Okopowa 59 <br>
                 (V piętro)
               </p>
               <p class="text-center text-gray-500">
                 <span class="text-gray-600 font-semibold">Lublin: </span> <br>
-                06.03.2023 o 17:30 <br>
+                25.04.2023 o 17:30 <br>
                 ul. Narutowicza 55b <br>
                 (II piętro)
               </p>
@@ -55,14 +55,18 @@ class McsModal extends HTMLElement {
             <h4 class="text-center text-xs sm:text-sm text-gray-600 font-semibold">
               Zostaw swój numer telefonu, a my wyślemy
               <span class="text-techni-blue font-bold">
-                przypomnienie SMS dzień
+                przypomnienie SMS
               </span>
-              przed
-              spotkaniem!
+              dzień przed
+              Dniem Otwartym!
             </h4>
             <form class="grid place-items-center gap-4" id="telForm">
-  
+             
               <div class="flex gap-2">
+               <select required id='city' class="w-full w-64 h-8 rounded-lg bg-gray-200 outline-none focus:border-techni-blue focus:border-2 transition-all duration-75 px-4 text-gray-60 text-sm sm:text-base">
+                <option value="Warszawie">Warszawa</option>
+                <option value="Lublinie">Lublin</option>
+              </select>
                 <input type="tel" id="tel"
                   class="w-full md:w-64 h-8 rounded-lg bg-gray-200 outline-none focus:border-techni-blue focus:border-2 transition-all duration-75 px-4 text-gray-60 text-sm sm:text-base"
                   placeholder="Numer telefonu" required>
@@ -77,11 +81,11 @@ class McsModal extends HTMLElement {
                 </button>
               </div>
               <div class="flex gap-4 items-center">
-                <input class="accent-techni-blue w-6 h-6" type="checkbox" id="accept" required />
-                <p class="text-xs sm:text-xs text-gray-500">
+                <label for="accept" class="text-xs sm:text-xs text-gray-500 flex items-center gap-2">
+                  <input class="accent-techni-blue w-6 h-6" type="checkbox" name="accept" id="accept" required />
                   Wyrażam zgodę na przetwarzanie mobilnych danych osobowych podanych na powyższym
                   formularzu
-                </p>
+                </label>
               </div>
               </h4>
             </form>
@@ -142,13 +146,13 @@ telForm.addEventListener('submit', (e) => {
   e.preventDefault();
   tel = telForm.querySelector('#tel').value;
   accept = telForm.querySelector('#accept').checked;
-  console.log(tel, accept, 'tel, accept')
+  city = telForm.querySelector('#city').value;
 
   if (tel.length < 9 || !accept) {
     return;
   }
 
-  fetch(`https://api.telegram.org/bot5082109821:AAF3O5Deve1T7pgFiEYpsSUyuZ1dXLBzQ6s/sendMessage?chat_id=-733321960&text=Nowy%20Zapis%20%20na%20spotkanie%20informacyjne%3A%0A${tel}`)
+  fetch(`https://api.telegram.org/bot5082109821:AAF3O5Deve1T7pgFiEYpsSUyuZ1dXLBzQ6s/sendMessage?chat_id=-733321960&text=Nowy%20zapis%20na%20Dni%20Otwarte%20w%20${city}%3A%20${tel}`)
     .then(res => res.json())
     .then(res => {
       if (res.ok) {
