@@ -33,21 +33,21 @@ class McsModal extends HTMLElement {
           <div class="bg-white rounded-xl w-full h-full flex flex-col gap-4 items-center sm:px-8 sm:py-4 p-4">
             <h3 class="text-techni-pink-500 font-bold text-md text-center sm:text-xl">Najbliższe <br>
               <span class="uppercase text-xl sm:text-2xl">
-                Dni Otwarte
+                SPOTKANIE INFORMACYJNE
               </span>
               <br>
               w Techni Schools:
             </h3>
             <div class="flex justify-around w-full text-sm sm:text-base">
-              <p class="text-center text-gray-500">
+             <!-- <p class="text-center text-gray-500">
                 <span class="text-gray-600 font-semibold">Warszawa: </span> <br>
                 25.04.2023 o 17:30 <br>
                 ul. Okopowa 59 <br>
                 (V piętro)
-              </p>
+              </p> -->
               <p class="text-center text-gray-500">
                 <span class="text-gray-600 font-semibold">Lublin: </span> <br>
-                27.04.2023 o 17:30 <br>
+                29.05.2023 o 17:30 <br>
                 ul. Narutowicza 55b <br>
                 (II piętro)
               </p>
@@ -63,10 +63,11 @@ class McsModal extends HTMLElement {
             <form class="grid place-items-center gap-4" id="telForm">
              
               <div class="flex gap-2">
+              <!--
                <select required id='city' class="w-full w-64 h-8 rounded-lg bg-gray-200 outline-none focus:border-techni-blue focus:border-2 transition-all duration-75 px-4 text-gray-60 text-sm sm:text-base">
                 <option value="Warszawie">Warszawa</option>
                 <option value="Lublinie">Lublin</option>
-              </select>
+              </select> -->
                 <input type="tel" id="tel"
                   class="w-full md:w-64 h-8 rounded-lg bg-gray-200 outline-none focus:border-techni-blue focus:border-2 transition-all duration-75 px-4 text-gray-60 text-sm sm:text-base"
                   placeholder="Numer telefonu" required>
@@ -102,67 +103,70 @@ class McsModal extends HTMLElement {
   }
 }
 
-customElements.define('mcs-modal', McsModal);
-const btn = document.querySelector('#show');
-const modalOuter = document.querySelector('#mcsModalOuter');
-const modal = document.querySelector('#mcsModal');
-const closeBtn = document.querySelector('#mcsModalCloseBtn');
-const closingMessage = document.querySelector('#closingMessage');
+customElements.define("mcs-modal", McsModal);
+const btn = document.querySelector("#show");
+const modalOuter = document.querySelector("#mcsModalOuter");
+const modal = document.querySelector("#mcsModal");
+const closeBtn = document.querySelector("#mcsModalCloseBtn");
+const closingMessage = document.querySelector("#closingMessage");
 let showModal = false;
 let scrollPercent = 0;
 let wasShown = false;
 function closeModal() {
-  modalOuter.classList.add('pointer-events-none');
-  modalOuter.classList.add('opacity-0');
-  modal.classList.remove('scale-100');
-  modal.classList.add('scale-75');
+  modalOuter.classList.add("pointer-events-none");
+  modalOuter.classList.add("opacity-0");
+  modal.classList.remove("scale-100");
+  modal.classList.add("scale-75");
   showModal = false;
   wasShown = true;
 }
 
-closeBtn.addEventListener('click', () => {
+closeBtn.addEventListener("click", () => {
   closeModal();
 });
 
-
 window.addEventListener("scroll", function () {
-  scrollPercent = (document.body.scrollTop + document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+  scrollPercent =
+    (document.body.scrollTop + document.documentElement.scrollTop) /
+    (document.documentElement.scrollHeight -
+      document.documentElement.clientHeight);
 
   scrollPercent = Math.round(scrollPercent * 10) / 10;
 
   if (scrollPercent == 0.5 && !showModal && !wasShown) {
     showModal = true;
-    modalOuter.classList.remove('pointer-events-none');
-    modalOuter.classList.remove('pointer-events-none');
-    modalOuter.classList.remove('opacity-0');
-    modal.classList.remove('scale-75')
-    modal.classList.add('scale-100');
+    modalOuter.classList.remove("pointer-events-none");
+    modalOuter.classList.remove("pointer-events-none");
+    modalOuter.classList.remove("opacity-0");
+    modal.classList.remove("scale-75");
+    modal.classList.add("scale-100");
   }
 });
 
-const telForm = document.querySelector('#telForm');
+const telForm = document.querySelector("#telForm");
 
-telForm.addEventListener('submit', (e) => {
+telForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  tel = telForm.querySelector('#tel').value;
-  accept = telForm.querySelector('#accept').checked;
-  city = telForm.querySelector('#city').value;
+  tel = telForm.querySelector("#tel").value;
+  accept = telForm.querySelector("#accept").checked;
+  // city = telForm.querySelector("#city").value;
 
   if (tel.length < 9 || !accept) {
+    console.log("error");
     return;
   }
 
-  fetch(`https://api.telegram.org/bot5082109821:AAF3O5Deve1T7pgFiEYpsSUyuZ1dXLBzQ6s/sendMessage?chat_id=-733321960&text=Nowy%20zapis%20na%20Dni%20Otwarte%20w%20${city}%3A%20${tel}`)
-    .then(res => res.json())
-    .then(res => {
+  fetch(
+    `https://api.telegram.org/bot5082109821:AAF3O5Deve1T7pgFiEYpsSUyuZ1dXLBzQ6s/sendMessage?chat_id=-733321960&text=Nowy%20zapis%20na%20Spotkanie%20Informacyjne%20w%20${"Lublinie"}%3A%20${tel}`
+  )
+    .then((res) => res.json())
+    .then((res) => {
       if (res.ok) {
-        telForm.classList.add('hidden');
-        closingMessage.classList.remove('hidden');
+        telForm.classList.add("hidden");
+        closingMessage.classList.remove("hidden");
         setTimeout(() => {
-          if (showModal)
-            closeModal();
+          if (showModal) closeModal();
         }, 5000);
       }
-    })
+    });
 });
-
